@@ -5,6 +5,7 @@ const slice = createSlice({
     initialState: {
         count: 0,
         day: 0,
+        savings: 10,
     },
     reducers: {
         increment(state) {
@@ -14,6 +15,12 @@ const slice = createSlice({
             const next = (state.day === 6) ? 0 : state.day + 1
             state.day = next
             // return { ...state, day: next }
+        },
+        save(state, action) {
+
+        },
+        spend(state, action) {
+
         }
     }
 })
@@ -23,4 +30,6 @@ export default slice.reducer
 export const { //ACTION CREATORS
     increment,
     nextDay,
+    save,
+    spend,
 } = slice.actions
