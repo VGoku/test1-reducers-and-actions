@@ -17,10 +17,14 @@ const slice = createSlice({
             // return { ...state, day: next }
         },
         save(state, action) {
-
+            const amount = action.payload
+            state.savings += amount
         },
         spend(state, action) {
-
+            const amount = action.payload
+            state.savings = amount < state.savings
+            ? state.savings - amount
+            : 0
         }
     }
 })
