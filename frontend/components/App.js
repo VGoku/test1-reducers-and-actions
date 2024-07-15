@@ -1,10 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { increment } from '../state/slice';
+import { increment, nextDay } from '../state/slice';
 
 export default function App() {
   const count = useSelector(st => st.state.count)
-  const day = "Monday"
+  const day = useSelector(st => {
+    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    return days[st.state.day]
+  })
   const dispatch = useDispatch()
   return (
     <div>
@@ -14,6 +17,8 @@ export default function App() {
       }}>This count is {count}</button>
       <button onClick={() => {
         //dispatch nextDay
+        const action = nextDay()
+        dispatch(action)
       }}>The day is {day}</button>
     </div>
   )
