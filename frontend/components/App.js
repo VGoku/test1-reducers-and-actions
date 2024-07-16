@@ -28,12 +28,12 @@ export default function App() {
         <h3>Savings are at ${savings}</h3>
 
         <button onClick={() => {
-          const action = save(10)
-          dispatch(action)
+          // const action = save(10)
+          dispatch(save(10))
         }}>Save $10</button>
         <button onClick={() => {
-          const action = spend(5)
-          dispatch(action)
+          // const action = spend(5)
+          dispatch(spend(5))
         }}>Spend $5</button>
       </div>
     </div>
