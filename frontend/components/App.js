@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, nextDay, save, spend } from '../state/slice';
 import "../styles/styles.css"
+import { favFriend, deleteFriend, createFriend } from '../state/friendsSlice';
 
 export default function App() {
   const count = useSelector(st => st.state.count);
@@ -12,11 +13,7 @@ export default function App() {
   });
   const savings = useSelector(st => st.state.savings);
 
-  const friends = [
-    { id: "ldo", name: "Pam", fav: true },
-    { id: "1sb", name: "Jess", Fav: false },
-    { id: "xu7", name: "Ana", fav: false },
-  ]
+  const friends = useSelector(st => st.friends.list)
   const dispatch = useDispatch();
   const ref = useRef();
   return (
@@ -44,21 +41,30 @@ export default function App() {
           dispatch(spend(5))
         }}>Spend $5</button>
       </div>
-      <form>
-        <h3>Friends</h3>
+      <div>
+      <h3>Friends</h3>
         <input ref={ref}></input>
-        <button>create</button>
+        <button onClick={() => {
+          const name = ref.current.value
+          dispatch(createFriend(name))
+        }}>create</button>
         <ul>
           {friends.map(fr => (
             <li key={fr.id}>
               {fr.name}
-              <button>fav</button>
-              <button>del</button>
-              {fr.fav && "❤️"}
+              <button onClick={() => {
+                //dispatch favFriend
+                dispatch(favFriend(fr.id))
+              }}>fav</button>
+              <button onClick={() => {
+                // dispatch deleteFriend
+                dispatch(deleteFriend(fr.id))
+              }}>del</button>
+              {fr.fav && " ❤️"}
             </li>
           ))}
         </ul>
-        </form>
+      </div>
         {/* <div>
           <h3>Create Friends</h3>
       <input ref={ref}></input>
